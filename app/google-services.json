@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "930563701464",
+    "project_id": "frinder-2bd56",
+    "storage_bucket": "frinder-2bd56.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:930563701464:android:387b0a62e1fcd9bef575ad",
+        "android_client_info": {
+          "package_name": "com.example.frinder"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "930563701464-o845p6a8lhijb7kllr6s0mi54jvuueu2.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.frinder",
+            "certificate_hash": "005c30ab521ea85c992eac28333db05f54b73928"
+          }
+        },
+        {
+          "client_id": "930563701464-825nfdbb508p45aqqu7qfli964rt9b7i.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAPjFJEJ8VeX3tx6Jbe3qy_VtBjFlcZvTk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "930563701464-825nfdbb508p45aqqu7qfli964rt9b7i.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
