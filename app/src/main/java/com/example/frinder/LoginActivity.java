@@ -18,8 +18,6 @@ import com.google.firebase.auth.FirebaseUser;
 
 public class LoginActivity extends AppCompatActivity {
 
-
-
     private EditText mEmail, mPassword;
     private Button mLogin;
 
@@ -30,7 +28,9 @@ public class LoginActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
-        mAuth = FirebaseAuth.getInstance();
+
+
+  mAuth = FirebaseAuth.getInstance();
         firebaseAuthStateListener = new FirebaseAuth.AuthStateListener() {
             @Override
             public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
@@ -60,6 +60,13 @@ public class LoginActivity extends AppCompatActivity {
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (!task.isSuccessful()) {
                             Toast.makeText(LoginActivity.this, "Error en el Registro", Toast.LENGTH_SHORT);
+                        }else{
+                            Toast.makeText(LoginActivity.this, "Entrooo", Toast.LENGTH_SHORT);
+                            System.out.println("entro");
+                            mAuth.addAuthStateListener(firebaseAuthStateListener);
+
+
+
                         }
                     }
                 });
@@ -67,10 +74,9 @@ public class LoginActivity extends AppCompatActivity {
             }
         });
 
-
     }
 
-    @Override
+   /* @Override
     protected void onStart() {
         super.onStart();
 
@@ -81,5 +87,5 @@ public class LoginActivity extends AppCompatActivity {
     protected void onStop() {
         super.onStop();
         mAuth.removeAuthStateListener(firebaseAuthStateListener);
-    }
+    }*/
 }
