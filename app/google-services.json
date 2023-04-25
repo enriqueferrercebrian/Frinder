@@ -2,7 +2,9 @@
   "project_info": {
     "project_number": "930563701464",
     "project_id": "frinder-2bd56",
-    "storage_bucket": "frinder-2bd56.appspot.com"
+    "storage_bucket": "frinder-2bd56.appspot.com",
+    "firebase_url": "https://frinder-2bd56-default-rtdb.europe-west1.firebasedatabase.app"
+
   },
   "client": [
     {

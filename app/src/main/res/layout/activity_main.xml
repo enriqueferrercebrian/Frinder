@@ -4,8 +4,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-
-
     tools:context=".MainActivity">
 
 
@@ -22,8 +20,8 @@
         app:layout_constraintTop_toTopOf="parent" />
 
 
-    <com.lorentzos.flingswipe.SwipeFlingAdapterView
 
+    <com.lorentzos.flingswipe.SwipeFlingAdapterView
 
         android:id="@+id/frame"
         android:layout_width="match_parent"
@@ -48,4 +46,18 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.07999998"
         tools:visibility="visible" />
+
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:onClick="logoutUser"
+        android:text="SignOut"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.049"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.023" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
