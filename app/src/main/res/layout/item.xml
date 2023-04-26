@@ -30,15 +30,41 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:id="@+id/imageView"/>
+
             <TextView
                 android:id="@+id/name"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:background="#FF9800"
-                android:gravity="center"
+                android:background="#00FF9800"
+                android:gravity="center_horizontal"
+
                 android:textColor="@color/black"
                 android:textSize="40sp"
-                tools:text="hello" />
+                tools:text="name" />
+
+            <TextView
+                android:id="@+id/age"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="#00FF9800"
+                android:gravity="bottom|left"
+
+                android:textColor="@color/black"
+                android:textSize="40sp"
+                tools:text="age" />
+
+            <TextView
+                android:id="@+id/city"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="#00FF9800"
+                android:gravity="bottom|right"
+
+                android:textColor="@color/black"
+                android:textSize="35sp"
+                android:translationY="-5sp"
+                tools:text="city" />
+
 
             <View
                 android:id="@+id/item_swipe_left_indicator"

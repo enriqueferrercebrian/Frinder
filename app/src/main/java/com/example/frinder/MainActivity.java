@@ -34,6 +34,9 @@ public class MainActivity extends AppCompatActivity {
     private TextView mUserName;
     final FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
     private FirebaseAuth mAuth;
+    private String currentUid;
+    private DatabaseReference usersDb;
+
 
     ListView listView;
     List<cards> rowItems;
@@ -44,7 +47,8 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         mUserName = findViewById(R.id.userName);
         mAuth = FirebaseAuth.getInstance();
-
+        currentUid = mAuth.getCurrentUser().getUid();
+        usersDb = FirebaseDatabase.getInstance().getReference().child("Users");
 
         checkUserSex();
 
@@ -66,14 +70,17 @@ public class MainActivity extends AppCompatActivity {
 
             @Override
             public void onLeftCardExit(Object dataObject) {
-                //Do something on the left!
-                //You also have access to the original object.
-                //If you want to use it just cast it (String) dataObject
+                cards obj = (cards) dataObject;
+                String userId = obj.getUserId();
+                usersDb.child(oppositeUserSex).child(userId).child("connections").child("no").child(currentUid).setValue(true);
                 Toast.makeText(MainActivity.this, "Left!", Toast.LENGTH_SHORT).show();
             }
 
             @Override
             public void onRightCardExit(Object dataObject) {
+                cards obj = (cards) dataObject;
+                String userId = obj.getUserId();
+                usersDb.child(oppositeUserSex).child(userId).child("connections").child("yes").child(currentUid).setValue(true);
                 Toast.makeText(MainActivity.this, "Right!", Toast.LENGTH_SHORT).show();
 
             }
@@ -114,15 +121,14 @@ public class MainActivity extends AppCompatActivity {
 
             @Override
             public void onChildAdded(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
-                System.out.println(snapshot.getKey() + "******************************************1");
-                System.out.println(user.getUid() + "******************************************2");
+
 
                 if (snapshot.getKey().equals(user.getUid())) {
                     userSex = "Male";
                     oppositeUserSex = "Female";
                     String userName = snapshot.child("name").getValue(String.class);
 
-                    mUserName.setText("Bienvenido " + userName);
+                    mUserName.setText("Bienvenido\n" + userName);
                     getOppositeSexUser();
                 }
 
@@ -149,14 +155,13 @@ public class MainActivity extends AppCompatActivity {
         femaleDb.addChildEventListener(new ChildEventListener() {
             @Override
             public void onChildAdded(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
-                System.out.println(snapshot.getKey() + "******************************************3");
-                System.out.println(user.getUid() + "******************************************4");
+
 
                 if (snapshot.getKey().equals(user.getUid())) {
                     userSex = "Female";
                     oppositeUserSex = "Male";
                     String userName = snapshot.child("name").getValue(String.class);
-                    mUserName.setText("Bienvenida " + userName);
+                    mUserName.setText("Bienvenida\n" + userName);
                     getOppositeSexUser();
                 }
 
@@ -187,11 +192,28 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onChildAdded(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
 
-                if (snapshot.exists()) {
-                    cards item= new cards(snapshot.getKey(),snapshot.child("name").getValue().toString());
+                if (snapshot.exists() && !snapshot.child("connections").child("no").hasChild(currentUid) && !snapshot.child("connections").child("yes").hasChild(currentUid) ) {
+                    cards item= new cards(snapshot.getKey(),
+                            snapshot.child("name").getValue().toString(),
+                            snapshot.child("age").getValue().toString(),
+                            snapshot.child("city").getValue().toString());
                     rowItems.add(item);
                     arrayAdapter.notifyDataSetChanged();
                 }
+              /*  if (snapshot.child("sex").getValue() != null) {
+                    if (snapshot.exists() && !snapshot.child("connections").child("nope").hasChild(currentUid) &&
+                            !snapshot.child("connections").child("yeps").hasChild(currentUid) &&
+                            snapshot.child("sex").getValue().toString().equals(oppositeUserSex)) {
+                        String profileImageUrl = "default";
+                        if (!snapshot.child("profileImageUrl").getValue().equals("default")) {
+                            profileImageUrl = snapshot.child("profileImageUrl").getValue().toString();
+                        }
+                        cards item = new cards(snapshot.getKey(), snapshot.child("name").getValue().toString(), snapshot.child("age").getValue().toString(), snapshot.child("city").getValue().toString());
+                        rowItems.add(item);
+                        arrayAdapter.notifyDataSetChanged();
+                    }
+                }*/
+
 
             }
 

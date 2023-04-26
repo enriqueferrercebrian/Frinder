@@ -28,9 +28,17 @@ public class arrayAdapter extends ArrayAdapter<cards> {
 
 
         TextView name = (TextView) convertView.findViewById(R.id.name);
+        TextView age = (TextView) convertView.findViewById(R.id.age);
+        TextView city = (TextView) convertView.findViewById(R.id.city);
+
+
         ImageView image = (ImageView) convertView.findViewById(R.id.imageView);
 
         name.setText(cardItem.getName());
+        age.setText(cardItem.getAge());
+        city.setText(cardItem.getCity());
+
+
         image.setImageResource(R.mipmap.ic_launcher);
 
 
