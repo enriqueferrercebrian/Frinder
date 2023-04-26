@@ -81,6 +81,7 @@ public class MainActivity extends AppCompatActivity {
                 cards obj = (cards) dataObject;
                 String userId = obj.getUserId();
                 usersDb.child(oppositeUserSex).child(userId).child("connections").child("yes").child(currentUid).setValue(true);
+                isMatch(userId);
                 Toast.makeText(MainActivity.this, "Right!", Toast.LENGTH_SHORT).show();
 
             }
@@ -108,6 +109,26 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+    }
+
+    private void isMatch(String userId) {
+        DatabaseReference currentUserConnectionDb = usersDb.child(userSex).child(currentUid).child("connections").child("yes").child(userId);
+        currentUserConnectionDb.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                if (snapshot.exists()){
+                    Toast.makeText(MainActivity.this, "Match!", Toast.LENGTH_SHORT).show();
+                    usersDb.child(oppositeUserSex).child(snapshot.getKey()).child("connections").child("matches").child(currentUid).setValue(true);
+                    usersDb.child(userSex).child(currentUid).child("connections").child("matches").child(snapshot.getKey()).setValue(true);
+
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
     }
 
     private String userSex;
@@ -200,19 +221,6 @@ public class MainActivity extends AppCompatActivity {
                     rowItems.add(item);
                     arrayAdapter.notifyDataSetChanged();
                 }
-              /*  if (snapshot.child("sex").getValue() != null) {
-                    if (snapshot.exists() && !snapshot.child("connections").child("nope").hasChild(currentUid) &&
-                            !snapshot.child("connections").child("yeps").hasChild(currentUid) &&
-                            snapshot.child("sex").getValue().toString().equals(oppositeUserSex)) {
-                        String profileImageUrl = "default";
-                        if (!snapshot.child("profileImageUrl").getValue().equals("default")) {
-                            profileImageUrl = snapshot.child("profileImageUrl").getValue().toString();
-                        }
-                        cards item = new cards(snapshot.getKey(), snapshot.child("name").getValue().toString(), snapshot.child("age").getValue().toString(), snapshot.child("city").getValue().toString());
-                        rowItems.add(item);
-                        arrayAdapter.notifyDataSetChanged();
-                    }
-                }*/
 
 
             }
