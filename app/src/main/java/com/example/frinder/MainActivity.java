@@ -52,13 +52,12 @@ public class MainActivity extends AppCompatActivity {
 
         checkUserSex();
 
-        mUserName.setText(userSex);
         rowItems = new ArrayList<cards>();
-
         arrayAdapter = new arrayAdapter(this, R.layout.item, rowItems);
 
         SwipeFlingAdapterView flingContainer = (SwipeFlingAdapterView) findViewById(R.id.frame);
         flingContainer.setAdapter(arrayAdapter);
+
         flingContainer.setFlingListener(new SwipeFlingAdapterView.onFlingListener() {
             @Override
             public void removeFirstObjectInAdapter() {
@@ -73,7 +72,7 @@ public class MainActivity extends AppCompatActivity {
                 cards obj = (cards) dataObject;
                 String userId = obj.getUserId();
                 usersDb.child(oppositeUserSex).child(userId).child("connections").child("no").child(currentUid).setValue(true);
-                Toast.makeText(MainActivity.this, "Left!", Toast.LENGTH_SHORT).show();
+                Toast.makeText(MainActivity.this, "no...", Toast.LENGTH_SHORT).show();
             }
 
             @Override
@@ -82,7 +81,7 @@ public class MainActivity extends AppCompatActivity {
                 String userId = obj.getUserId();
                 usersDb.child(oppositeUserSex).child(userId).child("connections").child("yes").child(currentUid).setValue(true);
                 isMatch(userId);
-                Toast.makeText(MainActivity.this, "Right!", Toast.LENGTH_SHORT).show();
+                Toast.makeText(MainActivity.this, "YESSS!", Toast.LENGTH_SHORT).show();
 
             }
 
@@ -116,7 +115,7 @@ public class MainActivity extends AppCompatActivity {
         currentUserConnectionDb.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                if (snapshot.exists()){
+                if (snapshot.exists()) {
                     Toast.makeText(MainActivity.this, "Match!", Toast.LENGTH_SHORT).show();
                     usersDb.child(oppositeUserSex).child(snapshot.getKey()).child("connections").child("matches").child(currentUid).setValue(true);
                     usersDb.child(userSex).child(currentUid).child("connections").child("matches").child(snapshot.getKey()).setValue(true);
@@ -212,9 +211,8 @@ public class MainActivity extends AppCompatActivity {
         oppositeSexDb.addChildEventListener(new ChildEventListener() {
             @Override
             public void onChildAdded(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
-
-                if (snapshot.exists() && !snapshot.child("connections").child("no").hasChild(currentUid) && !snapshot.child("connections").child("yes").hasChild(currentUid) ) {
-                    cards item= new cards(snapshot.getKey(),
+                if (snapshot.exists() && !snapshot.child("connections").child("no").hasChild(currentUid) && !snapshot.child("connections").child("yes").hasChild(currentUid)) {
+                    cards item = new cards(snapshot.getKey(),
                             snapshot.child("name").getValue().toString(),
                             snapshot.child("age").getValue().toString(),
                             snapshot.child("city").getValue().toString());
@@ -256,8 +254,15 @@ public class MainActivity extends AppCompatActivity {
     public void goSettings(View view) {
 
         Intent intent = new Intent(MainActivity.this, SettingsActivity.class);
-        intent.putExtra("userSex",userSex);
+        intent.putExtra("userSex", userSex);
         startActivity(intent);
         return;
     }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        checkUserSex();
+    }
+
 }

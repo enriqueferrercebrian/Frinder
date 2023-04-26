@@ -5,6 +5,7 @@ import androidx.activity.result.ActivityResultCallback;
 import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.Activity;
@@ -22,6 +23,7 @@ import com.bumptech.glide.Glide;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -43,7 +45,7 @@ public class SettingsActivity extends AppCompatActivity {
     private Button mBack, mConfirm;
     private ImageView mProfileImage;
     private FirebaseAuth mAuth;
-    private DatabaseReference mCustumerDatabase;
+    private DatabaseReference mUserDatabase;
     private String userId, name, phone, profileImageUrl;
     private Uri resultUri;
 
@@ -64,7 +66,7 @@ public class SettingsActivity extends AppCompatActivity {
         mAuth = FirebaseAuth.getInstance();
         userId = mAuth.getCurrentUser().getUid();
 
-        mCustumerDatabase = FirebaseDatabase.getInstance().getReference().child("Users").child("Customers").child(userId);
+        mUserDatabase = FirebaseDatabase.getInstance().getReference().child("Users").child(userSex).child(userId);
 
         getUserInfo();
 
@@ -84,6 +86,10 @@ public class SettingsActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 saveUserInformation();
+                Intent resultIntent = new Intent();
+
+                setResult(RESULT_OK, resultIntent);
+                finish();
 
             }
         });
@@ -98,34 +104,48 @@ public class SettingsActivity extends AppCompatActivity {
 
     }
 
-    private void getUserInfo() {
-        mCustumerDatabase.addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
 
-                if (snapshot.exists() && snapshot.getChildrenCount() > 0) {
+
+
+    private void getUserInfo() {
+        mUserDatabase.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot snapshot) {
+
+
+                if(snapshot.exists() && snapshot.getChildrenCount()>0){
                     Map<String, Object> map = (Map<String, Object>) snapshot.getValue();
-                    if (map.get("name") != null) {
+                    if(map.get("name")!=null){
                         name = map.get("name").toString();
                         mNameField.setText(name);
                     }
-                    if (map.get("phone") != null) {
+
+                    if(map.get("phone")!=null){
                         phone = map.get("phone").toString();
                         mPhoneField.setText(phone);
                     }
-                    if (map.get("profileImageUrl") != null) {
+                    System.out.println(map.get("profileImageUrl") + "++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++");
+
+                    if(map.get("profileImageUrl")!=null){
                         profileImageUrl = map.get("profileImageUrl").toString();
-                        Glide.with(getApplication()).load(profileImageUrl).into(mProfileImage);
+                        switch(profileImageUrl){
+                            case "default":
+                                Glide.with(getApplication()).load(R.mipmap.ic_launcher).into(mProfileImage);
+                                break;
+                            default:
+                                Glide.with(getApplication()).load(profileImageUrl).into(mProfileImage);
+                                break;
+                        }
                     }
                 }
-
             }
 
             @Override
-            public void onCancelled(@NonNull DatabaseError error) {
+            public void onCancelled(DatabaseError databaseError) {
 
             }
         });
+
     }
 
     private void saveUserInformation() {
@@ -136,7 +156,7 @@ public class SettingsActivity extends AppCompatActivity {
 
         userInfo.put("name", name);
         userInfo.put("phone", phone);
-        mCustumerDatabase.updateChildren(userInfo);
+        mUserDatabase.updateChildren(userInfo);
 
         if (resultUri != null) {
 
@@ -161,13 +181,20 @@ public class SettingsActivity extends AppCompatActivity {
             uploadTask.addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
                 @Override
                 public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
-                    Uri downloadUrl = Uri.parse(taskSnapshot.getMetadata().getReference().getDownloadUrl().toString());
-                    Map userInfo = new HashMap<>();
 
-                    userInfo.put("profileImageUrl", downloadUrl.toString());
-                    mCustumerDatabase.updateChildren(userInfo);
-                    finish();
-                    return;
+                  /*  Uri downloadUrl = Uri.parse(taskSnapshot.getMetadata().getReference().getDownloadUrl().toString());*/
+                    taskSnapshot.getStorage().getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+                        @Override
+                        public void onSuccess(Uri downloadUrl) {
+                            Map userInfo = new HashMap<>();
+
+                            userInfo.put("profileImageUrl", downloadUrl.toString());
+                            mUserDatabase.updateChildren(userInfo);
+                            finish();
+                            return;
+                        }
+                    });
+
 
                 }
             });

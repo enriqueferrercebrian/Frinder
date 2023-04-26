@@ -47,4 +47,15 @@ public class cards {
     public void setCity(String city) {
         this.city = city;
     }
+
+    @Override
+    public String toString() {
+        return "cards{" +
+                "userId='" + userId + '\'' +
+                ", name='" + name + '\'' +
+                ", age='" + age + '\'' +
+                ", city='" + city + '\'' +
+                ", profileImageUrl='" + profileImageUrl + '\'' +
+                '}';
+    }
 }

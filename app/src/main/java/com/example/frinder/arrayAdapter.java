@@ -8,6 +8,7 @@ import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class arrayAdapter extends ArrayAdapter<cards> {
@@ -37,6 +38,7 @@ public class arrayAdapter extends ArrayAdapter<cards> {
         name.setText(cardItem.getName());
         age.setText(cardItem.getAge());
         city.setText(cardItem.getCity());
+
 
 
         image.setImageResource(R.mipmap.ic_launcher);
