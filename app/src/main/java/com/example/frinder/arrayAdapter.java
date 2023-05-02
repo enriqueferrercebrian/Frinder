@@ -8,6 +8,8 @@ import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -29,19 +31,18 @@ public class arrayAdapter extends ArrayAdapter<cards> {
 
 
         TextView name = (TextView) convertView.findViewById(R.id.name);
-        TextView age = (TextView) convertView.findViewById(R.id.age);
-        TextView city = (TextView) convertView.findViewById(R.id.city);
+      TextView age = (TextView) convertView.findViewById(R.id.age);
+       TextView city = (TextView) convertView.findViewById(R.id.city);
 
 
         ImageView image = (ImageView) convertView.findViewById(R.id.imageView);
 
         name.setText(cardItem.getName());
-        age.setText(cardItem.getAge());
+       age.setText(cardItem.getAge());
         city.setText(cardItem.getCity());
 
 
-
-        image.setImageResource(R.mipmap.ic_launcher);
+        Glide.with(getContext()).load(cardItem.getProfileImageUrl()).into(image);
 
 
             return convertView;

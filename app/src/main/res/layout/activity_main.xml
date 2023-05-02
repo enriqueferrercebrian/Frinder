@@ -11,7 +11,9 @@ android:orientation="vertical">
 <LinearLayout
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:orientation="horizontal">
+    android:orientation="horizontal"
+    android:background="@color/salmon"
+    >
 
     <Button
         android:layout_width="wrap_content"
@@ -36,6 +38,7 @@ android:orientation="vertical">
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Holaaaaa"
+        android:background="@color/salmon"
         android:textAlignment="center"
         android:textColor="@color/black"
         android:textSize="@android:dimen/app_icon_size"
@@ -50,16 +53,11 @@ android:orientation="vertical">
     <com.lorentzos.flingswipe.SwipeFlingAdapterView
         android:id="@+id/frame"
         android:layout_width="match_parent"
-        android:layout_height="373dp"
-        android:background="@android:color/white"
+        android:layout_height="match_parent"
+        android:background="@color/salmon"
         app:rotation_degrees="15.5"
         tools:context=".MyActivity" />
-    <com.lorentzos.flingswipe.SwipeFlingAdapterView
-        android:id="@+id/frameDescription"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@android:color/white"
-        app:rotation_degrees="15.5"
-        tools:context=".MyActivity" />
+
+
 
 </LinearLayout>

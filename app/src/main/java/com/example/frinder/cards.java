@@ -9,11 +9,12 @@ public class cards {
     private String profileImageUrl;
 
 
-    public cards (String userId, String name, String age, String city){
+    public cards (String userId, String name, String age, String city,String profileImageUrl){
         this.userId = userId;
         this.name = name;
         this.age = age;
         this.city = city;
+        this.profileImageUrl = profileImageUrl;
 
 
     }
@@ -46,6 +47,14 @@ public class cards {
 
     public void setCity(String city) {
         this.city = city;
+    }
+
+    public String getProfileImageUrl() {
+        return profileImageUrl;
+    }
+
+    public void setProfileImageUrl(String profileImageUrl) {
+        this.profileImageUrl = profileImageUrl;
     }
 
     @Override

@@ -29,6 +29,8 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
 
 
 public class RegistrationActivity extends AppCompatActivity {
@@ -116,10 +118,18 @@ public class RegistrationActivity extends AppCompatActivity {
                             Toast.makeText(RegistrationActivity.this, "sign up error", Toast.LENGTH_SHORT).show();
                         }else{
                             String userId = mAuth.getCurrentUser().getUid();
-                            DatabaseReference currentUserDb = FirebaseDatabase.getInstance().getReference().child("Users").child(radioButton.getText().toString()).child(userId).child("name");
-                            currentUserDb.setValue(name);
-                            currentUserDb = FirebaseDatabase.getInstance().getReference().child("Users").child(radioButton.getText().toString()).child(userId).child("birth");
-                            currentUserDb.setValue(birthString);
+                            DatabaseReference currentUserDb = FirebaseDatabase.getInstance().getReference().child("Users").child(userId);
+                            Map userInfo = new HashMap<>();
+                            userInfo.put("name", name);
+                            userInfo.put("sex", radioButton.getText().toString());
+                            userInfo.put("profileImageUrl", "https://firebasestorage.googleapis.com/v0/b/frinder-2bd56.appspot.com/o/currentImage%2FFrinder.jpeg?alt=media&token=6ff2b4d1-0f53-4607-ba2a-199925e3ab26");
+                            currentUserDb.updateChildren(userInfo);
+                            Intent intent = new Intent(RegistrationActivity.this, ChooseLoginRegistrationActivity.class);
+                            startActivity(intent);
+                            return;
+
+
+
                         }
                     }
                 });
