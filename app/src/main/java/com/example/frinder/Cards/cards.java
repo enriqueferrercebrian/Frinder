@@ -1,4 +1,4 @@
-package com.example.frinder.cards;
+package com.example.frinder.Cards;
 
 
 

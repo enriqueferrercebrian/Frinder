@@ -1,4 +1,4 @@
-package com.example.frinder.cards;
+package com.example.frinder.Cards;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -10,7 +10,6 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.example.frinder.R;
-import com.example.frinder.cards.cards;
 
 import java.util.List;
 

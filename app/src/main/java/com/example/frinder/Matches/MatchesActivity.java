@@ -1,4 +1,4 @@
-package com.example.frinder.matches;
+package com.example.frinder.Matches;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -114,7 +114,5 @@ public class MatchesActivity extends AppCompatActivity {
 
     private List<MatchesObject> getDataSetMatches() {
         return resultsMatches;
-
-
     }
 }

@@ -12,9 +12,9 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.frinder.cards.arrayAdapter;
-import com.example.frinder.cards.cards;
-import com.example.frinder.matches.MatchesActivity;
+import com.example.frinder.Cards.arrayAdapter;
+import com.example.frinder.Cards.cards;
+import com.example.frinder.Matches.MatchesActivity;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.ChildEventListener;
@@ -31,7 +31,7 @@ import java.util.List;
 public class MainActivity extends AppCompatActivity {
 
     private cards cards_data[];
-    private com.example.frinder.cards.arrayAdapter arrayAdapter;
+    private com.example.frinder.Cards.arrayAdapter arrayAdapter;
     private int i;
     private TextView mUserName;
     final FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
@@ -201,17 +201,19 @@ public class MainActivity extends AppCompatActivity {
         usersDb.addChildEventListener(new ChildEventListener() {
             @Override
             public void onChildAdded(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
-                if (snapshot.exists() && !snapshot.child("connections").child("no").hasChild(currentUid) && !snapshot.child("connections").child("yes").hasChild(currentUid) && snapshot.child("sex" ).getValue().toString().equals(oppositeUserSex)) {
+                if (snapshot.child("sex").getValue() != null) {
+                    if (snapshot.exists() && !snapshot.child("connections").child("no").hasChild(currentUid) && !snapshot.child("connections").child("yes").hasChild(currentUid) && snapshot.child("sex").getValue().toString().equals(oppositeUserSex)) {
 
-                    String name = snapshot.child("name").getValue() != null ? snapshot.child("name").getValue().toString() : "Nombre no disponible";
-                    String age = snapshot.child("age").getValue() != null ? snapshot.child("age").getValue().toString() : "age no disponible";
-                    String city = snapshot.child("city").getValue() != null ? snapshot.child("city").getValue().toString() : "city no disponible";
-                    String profileImageUrl = (snapshot.child("profileImageUrl").getValue() != null && !snapshot.child("profileImageUrl").getValue().equals("default")) ? snapshot.child("profileImageUrl").getValue().toString() : "https://firebasestorage.googleapis.com/v0/b/frinder-2bd56.appspot.com/o/currentImage%2Fdescarga.jpeg?alt=media&token=a3a8c9de-c706-4c5a-b4a5-36251b1063aa";
+                        String name = snapshot.child("name").getValue() != null ? snapshot.child("name").getValue().toString() : "Nombre no disponible";
+                        String age = snapshot.child("age").getValue() != null ? snapshot.child("age").getValue().toString() : "age no disponible";
+                        String city = snapshot.child("city").getValue() != null ? snapshot.child("city").getValue().toString() : "city no disponible";
+                        String profileImageUrl = (snapshot.child("profileImageUrl").getValue() != null && !snapshot.child("profileImageUrl").getValue().equals("default")) ? snapshot.child("profileImageUrl").getValue().toString() : "https://firebasestorage.googleapis.com/v0/b/frinder-2bd56.appspot.com/o/currentImage%2Fdescarga.jpeg?alt=media&token=a3a8c9de-c706-4c5a-b4a5-36251b1063aa";
 
 
-                    cards item = new cards(snapshot.getKey(),name,age,city, profileImageUrl);
-                    rowItems.add(item);
-                    arrayAdapter.notifyDataSetChanged();
+                        cards item = new cards(snapshot.getKey(), name, age, city, profileImageUrl);
+                        rowItems.add(item);
+                        arrayAdapter.notifyDataSetChanged();
+                    }
                 }
 
 

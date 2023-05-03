@@ -1,4 +1,4 @@
-package com.example.frinder.matches;
+package com.example.frinder.Matches;
 
 import android.content.Context;
 import android.view.LayoutInflater;

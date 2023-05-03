@@ -1,5 +1,7 @@
-package com.example.frinder.matches;
+package com.example.frinder.Matches;
 
+import android.content.Intent;
+import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -7,6 +9,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.frinder.Chat.ChatActivity;
 import com.example.frinder.R;
 
 public class MatchesViewHolders extends RecyclerView.ViewHolder implements View.OnClickListener {
@@ -28,6 +31,10 @@ public class MatchesViewHolders extends RecyclerView.ViewHolder implements View.
 
     @Override
     public void onClick(View view) {
-
+        Intent intent = new Intent(view.getContext(), ChatActivity.class);
+        Bundle bundle = new Bundle();
+        bundle.putString("matchId", mMatchId.getText().toString());
+        intent.putExtras(bundle);
+        view.getContext().startActivity(intent);
     }
 }
