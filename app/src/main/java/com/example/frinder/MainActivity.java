@@ -8,11 +8,13 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
-import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.frinder.cards.arrayAdapter;
+import com.example.frinder.cards.cards;
+import com.example.frinder.matches.MatchesActivity;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.ChildEventListener;
@@ -29,7 +31,7 @@ import java.util.List;
 public class MainActivity extends AppCompatActivity {
 
     private cards cards_data[];
-    private arrayAdapter arrayAdapter;
+    private com.example.frinder.cards.arrayAdapter arrayAdapter;
     private int i;
     private TextView mUserName;
     final FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
@@ -246,6 +248,13 @@ public class MainActivity extends AppCompatActivity {
     public void goSettings(View view) {
 
         Intent intent = new Intent(MainActivity.this, SettingsActivity.class);
+        startActivity(intent);
+        return;
+    }
+
+    public void goMatches(View view) {
+
+        Intent intent = new Intent(MainActivity.this, MatchesActivity.class);
         startActivity(intent);
         return;
     }

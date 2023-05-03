@@ -1,4 +1,4 @@
-package com.example.frinder;
+package com.example.frinder.cards;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -9,8 +9,9 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+import com.example.frinder.R;
+import com.example.frinder.cards.cards;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class arrayAdapter extends ArrayAdapter<cards> {
