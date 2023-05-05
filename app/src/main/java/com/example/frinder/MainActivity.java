@@ -8,6 +8,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.CheckBox;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -38,6 +39,8 @@ public class MainActivity extends AppCompatActivity {
     private FirebaseAuth mAuth;
     private String currentUid;
     private DatabaseReference usersDb;
+    private Boolean option0, option1, option2, option3, option4, option5, option6, option7, option8, option9;
+
 
 
     ListView listView;
@@ -147,8 +150,17 @@ public class MainActivity extends AppCompatActivity {
             public void onDataChange(DataSnapshot dataSnapshot) {
                 if (dataSnapshot.exists()){
                     mUserName.setText("Bienvenid@\n" + dataSnapshot.child("name").getValue().toString());
-                    if (dataSnapshot.child("sex").getValue() != null){
-                        userSex = dataSnapshot.child("sex").getValue().toString();
+
+                    option0=dataSnapshot.child("option0").getValue(Boolean.class);
+                            option1=dataSnapshot.child("option1").getValue(Boolean.class);
+                    option2=dataSnapshot.child("option2").getValue(Boolean.class);
+                            option3=dataSnapshot.child("option3").getValue(Boolean.class);
+                    option4=dataSnapshot.child("option4").getValue(Boolean.class);
+                            option5=dataSnapshot.child("option5").getValue(Boolean.class);
+                    option6=dataSnapshot.child("option6").getValue(Boolean.class);
+                            option7=dataSnapshot.child("option7").getValue(Boolean.class);
+                    option8=dataSnapshot.child("option8").getValue(Boolean.class);
+                            option9=dataSnapshot.child("option9").getValue(Boolean.class);
 
                         switch (userSex){
                             case "Male":
@@ -161,7 +173,7 @@ public class MainActivity extends AppCompatActivity {
                         getOppositeSexUsers();
                     }
                 }
-            }
+
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
             }
