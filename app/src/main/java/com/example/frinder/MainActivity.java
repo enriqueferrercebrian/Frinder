@@ -209,8 +209,8 @@ public class MainActivity extends AppCompatActivity {
                     if (snapshot.exists() && !snapshot.child("connections").child("no").hasChild(currentUid) && !snapshot.child("connections").child("yes").hasChild(currentUid) && snapshot.child("sex").getValue().toString().equals(oppositeUserSex)) {
 
                         String name = snapshot.child("name").getValue() != null ? snapshot.child("name").getValue().toString() : "Nombre no disponible";
-                        String age = snapshot.child("age").getValue() != null ? snapshot.child("age").getValue().toString() : "age no disponible";
-                        String city = snapshot.child("city").getValue() != null ? snapshot.child("city").getValue().toString() : "city no disponible";
+                        String age = snapshot.child("age").getValue() != null ? snapshot.child("age").getValue().toString() : "";
+                        String city = snapshot.child("city").getValue() != null ? snapshot.child("city").getValue().toString() : "";
                         String profileImageUrl = (snapshot.child("profileImageUrl").getValue() != null && !snapshot.child("profileImageUrl").getValue().equals("default")) ? snapshot.child("profileImageUrl").getValue().toString() : "https://firebasestorage.googleapis.com/v0/b/frinder-2bd56.appspot.com/o/currentImage%2Fdescarga.jpeg?alt=media&token=a3a8c9de-c706-4c5a-b4a5-36251b1063aa";
 
 

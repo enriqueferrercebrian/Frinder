@@ -12,9 +12,10 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Login"
+        style="@style/CustomButton"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="500dp"
-        android:background="@drawable/button_bg"/>
+        />
 
     <Button
         android:id="@+id/registration"
@@ -23,7 +24,7 @@
         android:layout_below="@id/login"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="10dp"
-        android:background="@drawable/button_bg"
+        style="@style/CustomButton"
         android:text="Registrarse" />
 
     <ImageView

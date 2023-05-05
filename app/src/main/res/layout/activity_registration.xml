@@ -5,26 +5,44 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".RegistrationActivity">
+    android:background="@drawable/bg_gradient"
+    tools:context=".RegistrationActivity"
+    >
 
     <EditText
         android:id="@+id/name"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Nombre" />
+        android:hint="Nombre"
+        android:gravity="center"
+        android:textColorHint="@color/white"
+        android:backgroundTint="@color/white"
+        android:textColor="@color/white"
+        android:textStyle="bold"/>
 
     <EditText
         android:id="@+id/email"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="email" />
+        android:hint="email"
+        android:gravity="center"
+        android:backgroundTint="@color/white"
+        android:textColorHint="@color/white"
+        android:textColor="@color/white"
+        android:textStyle="bold"/>
 
 
     <EditText
         android:id="@+id/password"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="password" />
+        android:inputType="textPassword"
+        android:hint="password"
+        android:gravity="center"
+        android:backgroundTint="@color/white"
+        android:textColorHint="@color/white"
+        android:textColor="@color/white"
+        android:textStyle="bold"/>
 
     <TextView
         android:layout_width="match_parent"
@@ -34,6 +52,8 @@
         android:singleLine="false"
         android:text="BirthDay"
         android:textAlignment="center"
+        android:textColor="@color/white"
+        android:textSize="34sp"
         android:textStyle="bold" />
 
     <DatePicker
@@ -41,22 +61,32 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:calendarViewShown="false"
-        android:datePickerMode="spinner" />
+        android:datePickerMode="spinner"
+        android:theme="@style/MyDatePicker"
+        />
 
     <RadioGroup
         android:id="@+id/radioGroup"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center_horizontal">
 
         <RadioButton
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Male" />
+            android:paddingRight="10sp"
+            android:text="Male"
+            android:textColor="#FFFFFF"
+            android:textStyle="bold" />
 
         <RadioButton
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Female" />
+            android:paddingLeft="10sp"
+            android:text="Female"
+            android:textColor="#FFFFFF"
+            android:textStyle="bold" />
     </RadioGroup>
 
 
@@ -65,17 +95,20 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:includeFontPadding="false"
-        android:paddingTop="10sp"
+        android:paddingTop="15sp"
+        android:shadowColor="#EA0505"
         android:singleLine="false"
         android:text="AboutYou!"
         android:textAlignment="center"
+        android:textColor="#FFFFFF"
         android:textStyle="bold" />
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:paddingTop="10sp">
+        android:paddingTop="15sp"
+        android:paddingBottom="20dp">
 
         <LinearLayout
             android:layout_width="198dp"
@@ -83,31 +116,45 @@
             android:layout_gravity="left"
             android:orientation="vertical">
 
-
             <CheckBox
+                android:id="@+id/checkBox0"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Opción 1" />
+                android:text="Opción 1"
+                android:textColor="#FFF5F5"
+                android:textStyle="bold" />
 
             <CheckBox
+                android:id="@+id/checkBox1"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Opción 2" />
+                android:text="Opción 2"
+                android:textColor="#FFF5F5"
+                android:textStyle="bold" />
 
             <CheckBox
+                android:id="@+id/checkBox2"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Opción 3" />
+                android:text="Opción 3"
+                android:textColor="#FFF5F5"
+                android:textStyle="bold" />
 
             <CheckBox
+                android:id="@+id/checkBox3"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Opción 4" />
+                android:text="Opción 4"
+                android:textColor="#FFF5F5"
+                android:textStyle="bold" />
 
             <CheckBox
+                android:id="@+id/checkBox4"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Opción 5" />
+                android:text="Opción 5"
+                android:textColor="#FFF5F5"
+                android:textStyle="bold" />
 
         </LinearLayout>
 
@@ -119,29 +166,44 @@
 
 
             <CheckBox
+                android:id="@+id/checkBox5"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Opción 6" />
+                android:text="Opción 6"
+                android:textColor="#FFFFFF"
+                android:textStyle="bold" />
 
             <CheckBox
+                android:id="@+id/checkBox6"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Opción 2" />
+                android:text="Opción 7"
+                android:textColor="#FFFFFF"
+                android:textStyle="bold" />
 
             <CheckBox
+                android:id="@+id/checkBox7"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Opción 3" />
+                android:text="Opción 8"
+                android:textColor="#FFFFFF"
+                android:textStyle="bold" />
 
             <CheckBox
+                android:id="@+id/checkBox8"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Opción 4" />
+                android:text="Opción 9"
+                android:textColor="#FFFFFF"
+                android:textStyle="bold" />
 
             <CheckBox
+                android:id="@+id/checkBox9"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Opción 5" />
+                android:text="Opción 10"
+                android:textColor="#FFFFFF"
+                android:textStyle="bold" />
 
         </LinearLayout>
 
@@ -151,8 +213,11 @@
 
     <Button
         android:id="@+id/register"
-        android:layout_width="match_parent"
+        android:layout_width="112dp"
         android:layout_height="wrap_content"
-        android:text="Registrarse" />
+        android:layout_gravity="center"
+        style="@style/CustomButton"
+        android:text="Registrarse"
+        />
 
 </LinearLayout>

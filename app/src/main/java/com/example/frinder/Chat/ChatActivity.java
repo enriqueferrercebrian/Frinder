@@ -35,6 +35,7 @@ public class ChatActivity extends AppCompatActivity {
     private Button mSendButton;
     DatabaseReference mDatabaseUser, mDatabaseChat;
     private String currentUserId, matchId, chatId;
+    private boolean atBottom = true;
 
 
     @Override
@@ -51,8 +52,8 @@ public class ChatActivity extends AppCompatActivity {
         getChatId();
 
         mRecyclerView = (RecyclerView) findViewById(R.id.recyclerView);
-        mRecyclerView.setNestedScrollingEnabled(false);
-        mRecyclerView.setHasFixedSize(false);
+        mRecyclerView.setNestedScrollingEnabled(true);
+        mRecyclerView.setHasFixedSize(true);
         mChatLayoutManager = new LinearLayoutManager(ChatActivity.this);
         mRecyclerView.setLayoutManager(mChatLayoutManager);
         mChatAdapter = new ChatAdapter(getDataSetChat(), ChatActivity.this);
@@ -61,6 +62,10 @@ public class ChatActivity extends AppCompatActivity {
 
         mSendEditText = (EditText) findViewById(R.id.message);
         mSendButton = (Button) findViewById(R.id.send);
+
+
+
+
 
         mSendButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -132,16 +137,20 @@ public class ChatActivity extends AppCompatActivity {
                         createdByUser = snapshot.child("createdByUser").getValue().toString();
                     }
 
-                    if (message != null && createdByUser != null){
+                    if (message != null && createdByUser != null) {
 
                         Boolean currentUserBoolean = false;
-                        if (createdByUser.equals(currentUserId)){
+                        if (createdByUser.equals(currentUserId)) {
 
-                            currentUserBoolean =true;
+                            currentUserBoolean = true;
                         }
                         ChatObject newMessage = new ChatObject(message, currentUserBoolean);
                         resultsChat.add(newMessage);
                         mChatAdapter.notifyDataSetChanged();
+                        mRecyclerView.smoothScrollToPosition(resultsChat.size() -1 );
+
+
+
                     }
 
                 }
@@ -164,6 +173,7 @@ public class ChatActivity extends AppCompatActivity {
             }
         });
     }
+
 
     private ArrayList<ChatObject> resultsChat = new ArrayList<ChatObject>();
 
