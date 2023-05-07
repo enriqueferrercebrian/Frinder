@@ -108,7 +108,7 @@ public class RegistrationActivity extends AppCompatActivity {
                 SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
                 String birthString = dateFormat.format(birthDate.getTime());
                 try {
-                     age  =  check18(birthString);
+                     age  =  age(birthString);
                 } catch (ParseException e) {
                     throw new RuntimeException(e);
                 }
@@ -166,7 +166,7 @@ public class RegistrationActivity extends AppCompatActivity {
 
     }
 
-    private int check18(String birthString) throws ParseException {
+    private int age(String birthString) throws ParseException {
 
         // Convertir el birthString a un objeto Calendar
         SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");

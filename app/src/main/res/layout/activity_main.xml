@@ -17,6 +17,13 @@
         android:paddingTop="200dp"
         tools:context=".MyActivity" />
 
+    <ProgressBar
+        android:id="@+id/progress_bar"
+        android:layout_width="200dp"
+        android:layout_height="177dp"
+        android:layout_centerInParent="true"
+        android:indeterminateDrawable="@drawable/custom_spinner" />
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
