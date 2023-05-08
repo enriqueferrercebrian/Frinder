@@ -6,19 +6,42 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:background="@drawable/bg_gradient"
-    tools:context=".RegistrationActivity"
-    >
+    tools:context=".RegistrationActivity">
 
-    <EditText
-        android:id="@+id/name"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Nombre"
-        android:gravity="center"
-        android:textColorHint="@color/white"
-        android:backgroundTint="@color/white"
-        android:textColor="@color/white"
-        android:textStyle="bold"/>
+        android:orientation="horizontal"
+        android:paddingTop="0sp"
+        android:paddingBottom="0dp">
+
+
+        <EditText
+            android:id="@+id/name"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:hint="Nombre"
+            android:gravity="center"
+            android:textColorHint="@color/white"
+            android:backgroundTint="@color/white"
+            android:textColor="@color/white"
+            android:textStyle="bold"/>
+
+        <EditText
+            android:id="@+id/city"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:hint="Ciudad"
+            android:gravity="center"
+            android:textColorHint="@color/white"
+            android:backgroundTint="@color/white"
+            android:textColor="@color/white"
+            android:textStyle="bold"/>
+
+    </LinearLayout>
+
 
     <EditText
         android:id="@+id/email"

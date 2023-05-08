@@ -33,7 +33,7 @@ import java.util.Map;
 public class RegistrationActivity extends AppCompatActivity {
 
 
-    private EditText mEmail, mPassword, mName;
+    private EditText mEmail, mPassword, mName, mCity;
     private DatePicker mBirth;
     private Button mRegister;
     private FirebaseAuth mAuth;
@@ -74,16 +74,17 @@ public class RegistrationActivity extends AppCompatActivity {
 
         mRadioGroup = (RadioGroup) findViewById(R.id.radioGroup);
         mName = (EditText) findViewById(R.id.name);
-         mOption0 = (CheckBox) findViewById(R.id.checkBox0);
-         mOption1 = (CheckBox) findViewById(R.id.checkBox1);
-         mOption2 = (CheckBox) findViewById(R.id.checkBox2);
-         mOption3 = (CheckBox) findViewById(R.id.checkBox3);
-         mOption4 = (CheckBox) findViewById(R.id.checkBox4);
-         mOption5 = (CheckBox) findViewById(R.id.checkBox5);
-         mOption6 = (CheckBox) findViewById(R.id.checkBox6);
-         mOption7 = (CheckBox) findViewById(R.id.checkBox7);
-         mOption8 = (CheckBox) findViewById(R.id.checkBox8);
-         mOption9 = (CheckBox) findViewById(R.id.checkBox9);
+        mCity = (EditText) findViewById(R.id.city);
+        mOption0 = (CheckBox) findViewById(R.id.checkBox0);
+        mOption1 = (CheckBox) findViewById(R.id.checkBox1);
+        mOption2 = (CheckBox) findViewById(R.id.checkBox2);
+        mOption3 = (CheckBox) findViewById(R.id.checkBox3);
+        mOption4 = (CheckBox) findViewById(R.id.checkBox4);
+        mOption5 = (CheckBox) findViewById(R.id.checkBox5);
+        mOption6 = (CheckBox) findViewById(R.id.checkBox6);
+        mOption7 = (CheckBox) findViewById(R.id.checkBox7);
+        mOption8 = (CheckBox) findViewById(R.id.checkBox8);
+        mOption9 = (CheckBox) findViewById(R.id.checkBox9);
 
 
         mRegister.setOnClickListener(new View.OnClickListener() {
@@ -103,12 +104,11 @@ public class RegistrationActivity extends AppCompatActivity {
                 birthDate.set(year, month, day);
 
 
-
 // Guardar la fecha de nacimiento y la edad en el mapa de información de usuario
                 SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
                 String birthString = dateFormat.format(birthDate.getTime());
                 try {
-                     age  =  age(birthString);
+                    age = age(birthString);
                 } catch (ParseException e) {
                     throw new RuntimeException(e);
                 }
@@ -123,6 +123,7 @@ public class RegistrationActivity extends AppCompatActivity {
                 final String email = mEmail.getText().toString();
                 final String password = mPassword.getText().toString();
 
+                final String city = mCity.getText().toString();
 
                 final String name = mName.getText().toString();
 
@@ -137,6 +138,7 @@ public class RegistrationActivity extends AppCompatActivity {
                             DatabaseReference currentUserDb = FirebaseDatabase.getInstance().getReference().child("Users").child(userId);
                             Map userInfo = new HashMap<>();
                             userInfo.put("name", name);
+                            userInfo.put("city", city);
                             userInfo.put("sex", radioButton.getText().toString());
                             userInfo.put("profileImageUrl", "https://firebasestorage.googleapis.com/v0/b/frinder-2bd56.appspot.com/o/currentImage%2FFrinder.jpeg?alt=media&token=6ff2b4d1-0f53-4607-ba2a-199925e3ab26");
                             userInfo.put("birthdate", birthString);
