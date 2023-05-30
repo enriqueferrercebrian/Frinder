@@ -13,26 +13,27 @@
     android:paddingBottom="200sp"
     android:background="#00FFC296"
 >
+
     <androidx.cardview.widget.CardView
         android:id="@+id/cardView"
         android:layout_width="284dp"
-        android:layout_height="370dp"
+        android:layout_height="375dp"
         android:layout_gravity="top"
+        android:background="@color/grey"
         android:elevation="2dp"
-        app:cardCornerRadius="4dp"
-        android:background="@color/grey">
+        app:cardCornerRadius="4dp">
 
         <FrameLayout
             android:layout_width="250dp"
-            android:layout_height="329dp"
-            android:layout_gravity="center"
-          >
+            android:layout_height="379dp"
+            android:layout_gravity="top|center_horizontal">
 
             <ImageView
                 android:id="@+id/imageView"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:scaleType="centerCrop" />
+                android:scaleType="centerCrop"
+                />
 
             <TextView
                 android:id="@+id/name"
@@ -49,12 +50,13 @@
             <TextView
                 android:id="@+id/age"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_height="394dp"
                 android:background="#00FF9800"
                 android:gravity="bottom|left"
-                android:textStyle="bold"
+                android:paddingBottom="60dp"
                 android:textColor="@color/black"
                 android:textSize="30sp"
+                android:textStyle="bold"
                 tools:text="age" />
 
             <TextView
@@ -63,12 +65,23 @@
                 android:layout_height="match_parent"
                 android:background="#00FF9800"
                 android:gravity="bottom|right"
-                android:textStyle="bold"
+                android:paddingBottom="60dp"
                 android:textColor="@color/black"
                 android:textSize="35sp"
-                android:translationY="-5sp"
+                android:textStyle="bold"
+                android:translationY="10sp"
                 tools:text="city" />
 
+            <TextView
+                android:id="@+id/hobby"
+                android:layout_width="match_parent"
+                android:layout_height="369dp"
+                android:background="#00FF9800"
+                android:gravity="bottom|center_horizontal"
+                android:textColor="@color/black"
+                android:textSize="30sp"
+                android:textStyle="bold"
+                tools:text="hobby" />
 
             <View
                 android:id="@+id/item_swipe_left_indicator"

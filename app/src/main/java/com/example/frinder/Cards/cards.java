@@ -5,16 +5,17 @@ package com.example.frinder.Cards;
 
 public class cards {
     private String userId;
-    private String name,age, city;
+    private String name,age, city, hobby;
     private String profileImageUrl;
 
 
-    public cards (String userId, String name, String age, String city,String profileImageUrl){
+    public cards (String userId, String name, String age, String city,String profileImageUrl, String hobby){
         this.userId = userId;
         this.name = name;
         this.age = age;
         this.city = city;
         this.profileImageUrl = profileImageUrl;
+        this.hobby = hobby;
 
 
     }
@@ -55,6 +56,14 @@ public class cards {
 
     public void setProfileImageUrl(String profileImageUrl) {
         this.profileImageUrl = profileImageUrl;
+    }
+
+    public String getHobby() {
+        return hobby;
+    }
+
+    public void setHobby(String hobby) {
+        this.hobby = hobby;
     }
 
     @Override

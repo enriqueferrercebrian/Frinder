@@ -153,6 +153,7 @@ public class RegistrationActivity extends AppCompatActivity {
                             userInfo.put("option8", mOption8.isChecked());
                             userInfo.put("option9", mOption9.isChecked());
 
+                            Toast.makeText(RegistrationActivity.this, "user created successfully!", Toast.LENGTH_SHORT).show();
 
                             currentUserDb.updateChildren(userInfo);
                             Intent intent = new Intent(RegistrationActivity.this, ChooseLoginRegistrationActivity.class);
@@ -184,5 +185,11 @@ public class RegistrationActivity extends AppCompatActivity {
     static void makeToast(Context ctx, String s) {
         Toast.makeText(ctx, s, Toast.LENGTH_SHORT).show();
     }
+
+    public void onBackPressed() {
+        Intent intent = new Intent(RegistrationActivity.this, ChooseLoginRegistrationActivity.class);
+        startActivity(intent);
+        finish();
+        return;    }
 
 }

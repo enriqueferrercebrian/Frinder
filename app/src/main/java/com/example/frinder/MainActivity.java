@@ -57,6 +57,8 @@ public class MainActivity extends AppCompatActivity {
     private Boolean option0User2, option1User2, option2User2, option3User2, option4User2, option5User2, option6User2, option7User2, option8User2, option9User2;
     private RelativeLayout mLoadingLayout;
     private ProgressBar mProgressBar;
+    boolean charged = false;
+
 
     List<Boolean> options = new ArrayList<>();
     List<Boolean> optionsUser2 = new ArrayList<>();
@@ -94,23 +96,23 @@ public class MainActivity extends AppCompatActivity {
         timer.schedule(new TimerTask() {
             @Override
             public void run() {
-                // Aquí va el código que quieres ejecutar después de X segundos
-
-
-                        for (String e: usersListSorted)
-                            System.out.println(e);
-                System.out.println("Han pasado X segundos");
                 mProgressBar.setVisibility(View.INVISIBLE);
-
                 makeCards();
             }
         }, 10 * 1000);
 
+        Timer timer2 = new Timer();
+        timer2.schedule(new TimerTask() {
+            @Override
+            public void run() {
+               charged = true;
+            }
+        }, 11 * 1000);
 
         flingContainer.setFlingListener(new SwipeFlingAdapterView.onFlingListener() {
             @Override
             public void removeFirstObjectInAdapter() {
-                // this is the simplest way to delete an object from the Adapter (/AdapterView)
+                // Borrar una Card de la listay notificarlo al adaptador.
                 Log.d("LIST", "removed object!");
                 rowItems.remove(0);
                 arrayAdapter.notifyDataSetChanged();
@@ -136,6 +138,11 @@ public class MainActivity extends AppCompatActivity {
 
             @Override
             public void onAdapterAboutToEmpty(int itemsInAdapter) {
+                if(charged && rowItems.size() == 0){
+                    Toast.makeText(MainActivity.this, "No quedan mas amigos que conectar!", Toast.LENGTH_SHORT).show();
+
+                }
+
 
             }
 
@@ -195,16 +202,16 @@ public class MainActivity extends AppCompatActivity {
             public void onDataChange(DataSnapshot dataSnapshot) {
                 if (dataSnapshot.exists()) {
                     mUserName.setText("Bienvenid@\n" + dataSnapshot.child("name").getValue().toString());
-                    options.add( option0=dataSnapshot.child("option0").getValue(Boolean.class));
-                    options.add(option1=dataSnapshot.child("option1").getValue(Boolean.class));
-                    options.add(option2=dataSnapshot.child("option2").getValue(Boolean.class));
-                    options.add(option3=dataSnapshot.child("option3").getValue(Boolean.class));
-                    options.add(option4=dataSnapshot.child("option4").getValue(Boolean.class));
-                    options.add(option5=dataSnapshot.child("option5").getValue(Boolean.class));
-                    options.add(option6=dataSnapshot.child("option6").getValue(Boolean.class));
-                    options.add(option7=dataSnapshot.child("option7").getValue(Boolean.class));
-                    options.add(option8=dataSnapshot.child("option8").getValue(Boolean.class));
-                    options.add(option9=dataSnapshot.child("option9").getValue(Boolean.class));
+                    options.add(option0 = dataSnapshot.child("option0").getValue(Boolean.class));
+                    options.add(option1 = dataSnapshot.child("option1").getValue(Boolean.class));
+                    options.add(option2 = dataSnapshot.child("option2").getValue(Boolean.class));
+                    options.add(option3 = dataSnapshot.child("option3").getValue(Boolean.class));
+                    options.add(option4 = dataSnapshot.child("option4").getValue(Boolean.class));
+                    options.add(option5 = dataSnapshot.child("option5").getValue(Boolean.class));
+                    options.add(option6 = dataSnapshot.child("option6").getValue(Boolean.class));
+                    options.add(option7 = dataSnapshot.child("option7").getValue(Boolean.class));
+                    options.add(option8 = dataSnapshot.child("option8").getValue(Boolean.class));
+                    options.add(option9 = dataSnapshot.child("option9").getValue(Boolean.class));
 
 
                     getUser2Options();
@@ -226,17 +233,16 @@ public class MainActivity extends AppCompatActivity {
             public void onChildAdded(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
                 optionsUser2.clear();
 
-                optionsUser2.add(option0User2=snapshot.child("option0").getValue(Boolean.class));
-                optionsUser2.add(option1User2=snapshot.child("option1").getValue(Boolean.class));
-                optionsUser2.add(option2User2=snapshot.child("option2").getValue(Boolean.class));
-                optionsUser2.add(option3User2=snapshot.child("option3").getValue(Boolean.class));
-                optionsUser2.add(option4User2=snapshot.child("option4").getValue(Boolean.class));
-                optionsUser2.add(option5User2=snapshot.child("option5").getValue(Boolean.class));
-                optionsUser2.add(option6User2=snapshot.child("option6").getValue(Boolean.class));
-                optionsUser2.add(option7User2=snapshot.child("option7").getValue(Boolean.class));
-                optionsUser2.add(option8User2=snapshot.child("option8").getValue(Boolean.class));
-                optionsUser2.add(option9User2=snapshot.child("option9").getValue(Boolean.class));
-
+                optionsUser2.add(option0User2 = snapshot.child("option0").getValue(Boolean.class));
+                optionsUser2.add(option1User2 = snapshot.child("option1").getValue(Boolean.class));
+                optionsUser2.add(option2User2 = snapshot.child("option2").getValue(Boolean.class));
+                optionsUser2.add(option3User2 = snapshot.child("option3").getValue(Boolean.class));
+                optionsUser2.add(option4User2 = snapshot.child("option4").getValue(Boolean.class));
+                optionsUser2.add(option5User2 = snapshot.child("option5").getValue(Boolean.class));
+                optionsUser2.add(option6User2 = snapshot.child("option6").getValue(Boolean.class));
+                optionsUser2.add(option7User2 = snapshot.child("option7").getValue(Boolean.class));
+                optionsUser2.add(option8User2 = snapshot.child("option8").getValue(Boolean.class));
+                optionsUser2.add(option9User2 = snapshot.child("option9").getValue(Boolean.class));
 
 
                 int count = 0;
@@ -246,9 +252,9 @@ public class MainActivity extends AppCompatActivity {
                     }
                 }
                 String snapshotKey = snapshot.getKey();
-                usersMap.put(snapshotKey,count);
+                usersMap.put(snapshotKey, count);
 
-              sortUsers();
+                sortUsers();
 
 
 
@@ -305,16 +311,16 @@ public class MainActivity extends AppCompatActivity {
         });
         for (Object e : a) {
 
-                usersListSorted.add(((Map.Entry<String, Integer>) e).getKey());
+            usersListSorted.add(((Map.Entry<String, Integer>) e).getKey());
 
         }
 
     }
 
 
-    public void makeCards(){
+    public void makeCards() {
         usersListSorted.remove(currentUid);
-        for (String key : usersListSorted ) {
+        for (String key : usersListSorted) {
 
             DatabaseReference userToCard = FirebaseDatabase.getInstance().getReference().child("Users").child(key);
 
@@ -326,17 +332,21 @@ public class MainActivity extends AppCompatActivity {
                     if (snapshot.exists() && !snapshot.child("connections").child("no").hasChild(currentUid) && !snapshot.child("connections").child("yes").hasChild(currentUid)) {
 
                         String name = snapshot.child("name").getValue() != null ? snapshot.child("name").getValue().toString() : "Nombre no disponible";
+                        String Birth = null;
+                        String hobby = null;
                         String age = null;
                         try {
-                            age = String.valueOf(calculateAge(snapshot.child("age").getValue() != null ? snapshot.child("age").getValue().toString() : "02-01-2023"));
+                            age = String.valueOf(calculateAge(snapshot.child("birthdate").getValue() != null ? snapshot.child("birthdate").getValue().toString() : "02-01-2023"));
                         } catch (ParseException e) {
                             throw new RuntimeException(e);
                         }
+                        hobby = snapshot.child("option0").getValue(Boolean.class) ? "Baloncesto" : "Futbol";
+
                         String city = snapshot.child("city").getValue() != null ? snapshot.child("city").getValue().toString() : "Valencia";
                         String profileImageUrl = (snapshot.child("profileImageUrl").getValue() != null && !snapshot.child("profileImageUrl").getValue().equals("default")) ? snapshot.child("profileImageUrl").getValue().toString() : "https://firebasestorage.googleapis.com/v0/b/frinder-2bd56.appspot.com/o/currentImage%2Fdescarga.jpeg?alt=media&token=a3a8c9de-c706-4c5a-b4a5-36251b1063aa";
 
 
-                        cards item = new cards(snapshot.getKey(), name, age, city, profileImageUrl);
+                        cards item = new cards(snapshot.getKey(), name, age, city, profileImageUrl, hobby);
                         rowItems.add(item);
                         arrayAdapter.notifyDataSetChanged();
                     }
@@ -372,6 +382,7 @@ public class MainActivity extends AppCompatActivity {
         startActivity(intent);
         return;
     }
+
     private int calculateAge(String birthString) throws ParseException {
 
         // Convertir el birthString a un objeto Calendar
@@ -379,15 +390,32 @@ public class MainActivity extends AppCompatActivity {
         Calendar birthDate = Calendar.getInstance();
         birthDate.setTime(dateFormat.parse(birthString));
 
-// Calcular la edad del usuario
+        // Calcular la edad del usuario
         Calendar currentDate = Calendar.getInstance();
         int age = currentDate.get(Calendar.YEAR) - birthDate.get(Calendar.YEAR);
         return age;
     }
+
     @Override
     protected void onResume() {
         super.onResume();
-//        getUserOptions();
+        final FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+        DatabaseReference userDb = usersDb.child(user.getUid());
+        userDb.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                if (dataSnapshot.exists()) {
+                    mUserName.setText("Bienvenid@\n" + dataSnapshot.child("name").getValue().toString());
+
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+            }
+        });
+
     }
+
 
 }
